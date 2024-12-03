@@ -8,12 +8,12 @@
   <title>Mesto</title>
   <link rel="stylesheet" href="./pages/index.css">
 </head>
-<body class="page">
+<body class="page"> <!-- основная страница -->
 <div class="page__content">
-  <header class="header page__section">
+  <header class="header page__section"> <!-- шапка -->
     <img src="./images/logo.svg" alt="Логотип проекта масто" class="logo header__logo">
   </header>
-  <main class="content">
+  <main class="content"> <!-- основной контент -->
     <section class="profile page__section">
       <div class="profile__image" style="background-image: url('./images/avatar.jpg');"></div>
       <div class="profile__info">
@@ -28,12 +28,12 @@
       </ul>
     </section>
   </main>
-  <footer class="footer page__section">
+  <footer class="footer page__section"> <!-- подвал -->
     <p class="footer__copyright">
       © 2021 Mesto Russia
     </p>
   </footer>
-  <div class="popup popup_type_edit">
+  <div class="popup popup_type_edit"> <!-- модальное окно -->
     <div class="popup__content">
       <button type="button" class="popup__close"></button>
       <h3 class="popup__title">Редактировать профиль</h3>
@@ -44,7 +44,7 @@
       </form>
     </div>
   </div>
-  <div class="popup popup_type_new-card">
+  <div class="popup popup_type_new-card"> <!-- модальное окно -->
     <div class="popup__content">
       <button type="button" class="popup__close"></button>
       <h3 class="popup__title">Новое место</h3>
@@ -55,7 +55,7 @@
       </form>
     </div>
   </div>
-  <div class="popup popup_type_image">
+  <div class="popup popup_type_image"> <!-- модальное окно -->
     <div class="popup__content popup__content_content_image">
       <button type="button" class="popup__close"></button>
       <img src="" alt="" class="popup__image">
@@ -66,7 +66,7 @@
 <script src="./scripts/cards.js"></script>
 <script src="./scripts/index.js" defer></script>
 
-<template id="card-template">
+<template id="card-template"> <!-- темплейт карточки -->
   <li class="places__item card">
     <img class="card__image" src="" alt="" />
     <button type="button" class="card__delete-button"></button>
