@@ -6,34 +6,40 @@ const placesList = document.querySelector('.places__list');
 
 const profileEditButton = document.querySelector('.profile__edit-button'); // Находим кнопки открытия попапов
 const newCardButton = document.querySelector('.profile__add-button');
+const profileNameElement = document.querySelector('.profile__title');
+const profileDescriptionElement = document.querySelector('.profile__description');
 const profilePopupEdit = document.querySelector('.popup_type_edit');
 const popupNewCard = document.querySelector('.popup_type_new-card');
-const popupClose = document.querySelectorAll('.popup__close');
+const popupsClose = document.querySelectorAll('.popup__close');
 const formEditProfile = document.querySelector('.popup_type_edit .popup__form'); // Форма редактирования профиля
 const formNewCard = document.querySelector('.popup_type_new-card .popup__form'); // Форма добавления карточки
 
 
 initialCards.forEach(function(card) {  // Выводим все карточки из массива на страницу в элемент .places__list
     placesList.append(createCard(card, deleteCard, handleLike));
-});
+}); 
 
 profileEditButton.addEventListener('click', function() { //обработчик клика редактировать профиль
     openPopup(profilePopupEdit);
+    const profileName = profileNameElement.textContent;
+    const profileDescription = profileDescriptionElement.textContent;
+    const nameInput = profilePopupEdit.querySelector('.popup__input_type_name');
+    const descriptionInput = profilePopupEdit.querySelector('.popup__input_type_description');
+
+    nameInput.value = profileName;
+    descriptionInput.value = profileDescription;
 });
 
 newCardButton.addEventListener('click', function() {  //обработчик клика добавить +
     openPopup(popupNewCard);
 });
 
-popupClose.forEach(button => { // Обработчики закрытия попапов (на крестик)
+popupsClose.forEach(button => { // Обработчики закрытия попапов (на крестик)
     button.addEventListener('click', () => closePopup(button.closest('.popup'), false));
 });
 
 
 //реализация обработчика события submit при отправке формы 
-
-// Находим форму в DOM
-const formElement = document.querySelector('.popup__form');
 
 // Находим поля формы в DOM
 const nameInput = document.querySelector('.popup__input_type_name');
@@ -50,6 +56,8 @@ function handleFormSubmit(evt) {
 
     profileName.textContent = nameValue; // Вставьте новые значения с помощью textContent
     profileDescription.textContent = jobValue;
+
+    closePopup(profilePopupEdit);
 }
 
 formEditProfile.addEventListener('submit', handleFormSubmit); // Прикрепляем обработчик к форме:он будет следить за событием “submit” - «отправка»
