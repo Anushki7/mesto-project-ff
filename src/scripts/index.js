@@ -15,7 +15,6 @@ const profilePopupEdit = document.querySelector('.popup_type_edit');
 const popupNewCard = document.querySelector('.popup_type_new-card');
 const popupTypeImage = document.querySelector('.popup_type_image');
 const popupCloseButtons = document.querySelectorAll('.popup__close');
-const formElement = document.querySelector('.popup__form');
 const formEditProfile = document.querySelector('.popup_type_edit .popup__form'); // Форма редактирования профиля
 const formNewCard = document.querySelector('.popup_type_new-card .popup__form'); // Форма добавления карточки
 const formAvatar = document.querySelector('.popup_type_avatar .popup__form');
@@ -79,7 +78,7 @@ formAvatar.addEventListener('submit', () => {
 
 profileEditButton.addEventListener('click', function() { //обработчик клика редактировать профиль
     openPopup(profilePopupEdit);
-    clearValidation(formElement, validationConfig); // вызов функции clearValidation - функция очистки ошибок валидации
+    clearValidation(formEditProfile, validationConfig); // вызов функции clearValidation - функция очистки ошибок валидации
     const profileName = profileNameElement.textContent;
     const profileDescription = profileDescriptionElement.textContent;
     const nameInput = profilePopupEdit.querySelector('.popup__input_type_name');
@@ -99,9 +98,6 @@ popupCloseButtons.forEach(button => { // Обработчики закрытия
 });
 
 
-const nameInput = document.querySelector('.popup__input_type_name'); // Находим поля формы в DOM
-const jobInput = document.querySelector('.popup__input_type_description');
-
 function handleFormSubmitEditProfile(evt) { //реализация обработчика события submit при отправке формы 
     evt.preventDefault(); 
 
@@ -109,9 +105,9 @@ function handleFormSubmitEditProfile(evt) { //реализация обрабо�
     profileSaveBtn.textContent = 'Сохранение...';
 
     profileEditing(profileNameElement.textContent, profileDescriptionElement.textContent)
-    .then(() => {
-        profileNameElement.textContent = nameInput.value; //новые значения в поля 
-        profileDescriptionElement.textContent = jobInput.value;
+    .then((data) => {
+        profileNameElement.textContent = data.name; //новые значения в поля  !
+        profileDescriptionElement.textContent = data.about;
         closePopup(profilePopupEdit);
     })
     .catch((err) => {

@@ -34,14 +34,22 @@ const hasInvalidInput = (inputList) => { //проверяет наличие н�
     });
 }; 
 
+const disableSubmitButton = (button, config) => {
+  button.disabled = true;
+  button.classList.add(config.inactiveButtonClass);
+};
+
+const enableSubmitButton = (button, config) => {
+  button.disabled = false;
+  button.classList.remove(config.inactiveButtonClass);
+};
+
 const toggleButtonState = (inputList, buttonElement, validationConfig) => { //отключает и включает кнопку - меняет состояние кнопки
-    if (hasInvalidInput(inputList)) { // Если есть хотя бы один невалидный инпут сделай кнопку неактивной
-        buttonElement.disabled = true;
-        buttonElement.classList.add(validationConfig.inactiveButtonClass);
-    } else { // иначе сделай кнопку активной
-        buttonElement.disabled = false;
-        buttonElement.classList.remove(validationConfig.inactiveButtonClass);
-    }
+  if (hasInvalidInput(inputList)) {
+    disableSubmitButton(buttonElement, validationConfig);
+  } else {
+    enableSubmitButton(buttonElement, validationConfig);
+  }  
 }; 
 
 const setInputListeners = (formElement, validationConfig) => { //добавиv обработчики сразу всем полям формы

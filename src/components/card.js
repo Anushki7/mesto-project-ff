@@ -50,23 +50,11 @@ export function deleteCard(cardId, cardElement) { // Функция удален
 }
 
 export function handleLike( likeButton, cardId, likeCounter) {
-    if (!likeButton.classList.contains('card__like-button_is-active')) {
-        addLike(cardId) // лайкнуть
-        .then((res) => {
-            likeButton.classList.add('card__like-button_is-active');
-            likeCounter.textContent = res.likes.length; // обновление счетчика
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-    } else {
-        deleteLike(cardId) // удалить лайк
-        .then((res) => {
-            likeButton.classList.remove('card__like-button_is-active');
-            likeCounter.textContent = res.likes.length; //обновление счетчика
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-    }
+    const likeMethod = likeButton.classList.contains('card__like-button_is-active') ? deleteLike : addLike;
+    likeMethod(cardId) 
+    .then((res) => {
+        likeButton.classList.toggle('card__like-button_is-active'); 
+        likeCounter.textContent = res.likes.length;
+    })
+    .catch(err => console.log(err));
 }
